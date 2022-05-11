@@ -18,21 +18,24 @@
 /* Include Files */
 #include "xparameters.h"
 #include "xil_printf.h"
+#include "xtime_l.h"
 
 int main()
 {
     init_platform();
 
     xil_printf("Hello World\n");
-    
+    //usleep_A9((unsigned long)1000000);
+    XTime Xtime_Global;
+    XTime_GetTime(&Xtime_Global);
+    //xil_printf("Time = %lld\n", Xtime_Global);
+    //xil_printf("Time = %lld\n", Xtime_Global);
+    printf("Time = %lld\n", Xtime_Global);
+    //usleep_A9((unsigned long)1000000);
+    sleep(3);
+    XTime_GetTime(&Xtime_Global);
+    printf("Time = %lld\n", Xtime_Global);
     cleanup_platform();
-	// Code to automatically close qemu at the end
-	register int reg0 asm("r0");
-	register int reg1 asm("r1");
-
-	reg0 = 0x18;    // angel_SWIreason_ReportException
-	reg1 = 0x20026; // ADP_Stopped_ApplicationExit
-
-	asm("svc 0x00123456");  // make semihosting call
+	
     return 0;
 }

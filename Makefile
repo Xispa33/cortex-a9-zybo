@@ -4,20 +4,21 @@
 
 include paths.mk
 
-clean_bsp:
-	#make -f Uart_Example_Ps_bsp/Makefile clean -n
-	cd ${BSP_DIR}; make clean
+gen:
+	mkdir -p ${BUILD_STAGE_1}/bsp ; mkdir -p ${BUILD_STAGE_2}
 
-bsp: clean_bsp
+clean_bsp:
+	rm -rf ${BUILD_STAGE_1}/bsp
+
+bsp: gen
 	cd ${BSP_DIR}; make all
-	#make -f Uart_Example_Ps_bsp/Makefile all -n
+	find ${BSP_DIR} -type f \( -name "*.a" -o -name "*.o" \) -exec mv {} ${BUILD_STAGE_1}/bsp/ \;
 
 clean_app:
 	rm -rf ${BUILD_DIR}
 	cd ${APP_DIR_GEN}; make clean
 	
-clean: clean_bsp clean_app
+clean: gen clean_app
 
 all:
-	mkdir -p ${BUILD_STAGE_1}; mkdir -p ${BUILD_STAGE_2}
 	cd ${APP_DIR_GEN}; make all

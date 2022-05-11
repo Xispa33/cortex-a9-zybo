@@ -50,7 +50,7 @@ ${BUILD_STAGE_1}/%.o: ${APP_DIR}/src/%.c
 img.elf: $(OBJS) ${APP_DIR}/src/lscript.ld $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM v7 gcc linker'
-	arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,${APP_DIR}/src/lscript.ld -L../../bsp/ps7_cortexa9_0/lib -o "${BUILD_STAGE_2}/img.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,${APP_DIR}/src/lscript.ld -L${BUILD_STAGE_1}/bsp/ -o "${BUILD_STAGE_2}/img.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

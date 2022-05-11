@@ -108,4 +108,17 @@ void
 cleanup_platform()
 {
     disable_caches();
+    trigger_application_exit();
+}
+
+void trigger_application_exit()
+{
+    // Code to automatically close qemu at the end
+	register int reg0 asm("r0");
+	register int reg1 asm("r1");
+
+	reg0 = 0x18;    // angel_SWIreason_ReportException
+	reg1 = 0x20026; // ADP_Stopped_ApplicationExit
+
+	asm("svc 0x00123456");  // make semihosting call
 }
