@@ -21,15 +21,18 @@ LD_SRCS += \
 ../src/lscript.ld 
 
 C_SRCS += \
-${APP_DIR}/src/helloworld.c \
+${APP_DIR}/src/main.c \
+${APP_DIR}/src/xscugic_example.c \
 ${APP_DIR}/src/platform.c 
 
 OBJS += \
-${BUILD_STAGE_1}/helloworld.o \
+${BUILD_STAGE_1}/main.o \
+${BUILD_STAGE_1}/xscugic_example.o \
 ${BUILD_STAGE_1}/platform.o 
 
 C_DEPS += \
-${BUILD_STAGE_1}/helloworld.d \
+${BUILD_STAGE_1}/main.d \
+${BUILD_STAGE_1}/xscugic_example.d \
 ${BUILD_STAGE_1}/platform.d 
 
 # All Target
